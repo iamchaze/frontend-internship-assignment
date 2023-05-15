@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { debounceTime, filter } from 'rxjs';
+import { SearchService } from 'src/app/core/services/search.service';
 
 @Component({
   selector: 'front-end-internship-assignment-home',
@@ -9,8 +10,9 @@ import { debounceTime, filter } from 'rxjs';
 })
 export class HomeComponent implements OnInit {
   bookSearch: FormControl;
-
-  constructor() {
+  allBooksData:any
+  rawBooksData:any
+  constructor(private searchService:SearchService) {
     this.bookSearch = new FormControl('');
   }
 
@@ -22,12 +24,23 @@ export class HomeComponent implements OnInit {
     { name: 'Crypto' },
   ];
 
-  ngOnInit(): void {
-    this.bookSearch.valueChanges
-      .pipe(
-        debounceTime(300),
-      ).
-      subscribe((value: string) => {
-      });
+  ngOnInit() {
+    this.getAllBooks()
+    
+
+    // this.bookSearch.valueChanges
+    //   .pipe(
+    //     debounceTime(300),
+    //   ).
+    //   subscribe((value: string) => {
+    //     console.log();
+    //   });
+  }
+
+  getAllBooks(){
+      this.searchService.getSearchedBooks("*", 20, 0).subscribe((result) => {
+        this.rawBooksData = result
+        this.allBooksData = this.rawBooksData.docs
+      })
   }
 }

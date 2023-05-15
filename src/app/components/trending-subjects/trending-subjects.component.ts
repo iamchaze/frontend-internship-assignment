@@ -26,6 +26,7 @@ export class TrendingSubjectsComponent implements OnInit {
       this.allBooks = data?.works;
       // this.subjectsArray = data;
       this.isLoading = false;
+      console.log(this.allBooks);
     });
   }
 
