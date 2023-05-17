@@ -23,9 +23,10 @@
   </div>
   <div class="col-10">
     <div *ngIf="queryNotFound">
-      <h1 class="no-res-found">No Results Found for " {{ query }} "</h1>
+      <h1 class="no-res-found">No Results Found for "{{ query }}"</h1>
     </div>
     <div *ngIf="!isLoading">
+      <div *ngIf="showSearchResultsDialogue"><h2>Search Results for "{{ query }}"</h2></div>
       <front-end-internship-assignment-table-view
         (emitterObj)="paramObj = $event"
         [booksList]="allBooksData"

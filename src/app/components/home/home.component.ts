@@ -30,6 +30,7 @@ export class HomeComponent implements OnInit {
   queryNotFound:boolean = false
   showClearSearchBtn:boolean = false
   displayTrendingSubjectsBook:boolean = false
+  showSearchResultsDialogue:boolean = false
   
   constructor(private searchService:SearchService, private uiloader:NgxUiLoaderService, private router:Router) {
     this.bookSearch = new FormControl('');
@@ -53,9 +54,11 @@ export class HomeComponent implements OnInit {
       console.log(value);
       this.query = value
       this.showClearSearchBtn = true
+      this.showSearchResultsDialogue = true
       this.getBooks(this.query, this.tableSize, 0)
      } else {
       this.showClearSearchBtn = false
+      this.showSearchResultsDialogue = false
       this.getBooks("*", this.tableSize, this.currentPage)
      }
     });
