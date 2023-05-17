@@ -4,6 +4,7 @@ import { debounceTime, filter } from 'rxjs';
 import { SearchService } from 'src/app/core/services/search.service';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -26,16 +27,14 @@ export class HomeComponent implements OnInit {
   totalPages:any
   tableSizes:any = [5, 10, 15, 20]
   isLoading:boolean = false
-  constructor(private searchService:SearchService, private uiloader:NgxUiLoaderService) {
+  queryNotFound:boolean = false
+  showClearSearchBtn:boolean = false
+  displayTrendingSubjectsBook:boolean = false
+  
+  constructor(private searchService:SearchService, private uiloader:NgxUiLoaderService, private router:Router) {
     this.bookSearch = new FormControl('');
   }
-  trendingSubjects: Array<any> = [
-    { name: 'JavaScript' },
-    { name: 'CSS' },
-    { name: 'HTML' },
-    { name: 'Harry Potter' },
-    { name: 'Crypto' },
-  ];
+  
 
   ngOnInit() {
     this.paramObj = {
@@ -44,15 +43,19 @@ export class HomeComponent implements OnInit {
       "query": this.query
     }
     this.getBooks("*", this.tableSize, this.currentPage)
+    
     this.bookSearch.valueChanges
     .pipe(
       debounceTime(500),
     ).
     subscribe((value: string) => {
      if(value){
+      console.log(value);
       this.query = value
+      this.showClearSearchBtn = true
       this.getBooks(this.query, this.tableSize, 0)
      } else {
+      this.showClearSearchBtn = false
       this.getBooks("*", this.tableSize, this.currentPage)
      }
     });
@@ -60,12 +63,17 @@ export class HomeComponent implements OnInit {
   getBooks(query:any, limit:any, offset:any){
     this.isLoading = true
       this.searchService.getSearchedBooks(query, limit, limit*offset).subscribe((result) => {
-        this.allBooksData = result?.docs
+        if(result.numFound > 0){
+          this.allBooksData = result?.docs
         this.recordsLength = result?.numFound
         this.isLoading = false
+        this.queryNotFound = false
+        this.totalPages = Math.floor(this.recordsLength / this.tableSize)
+        } else {
+          this.queryNotFound = true
+        } 
       })
   }
-
   previousPage(){
     this.paramObj = {
       "offset": this.currentPage--,
@@ -86,7 +94,7 @@ export class HomeComponent implements OnInit {
   tableSizeChange(value:any)
   {
     this.paramObj = {
-      "offset": this.currentPage,
+      "offset": this.currentPage * parseInt(value) + this.currentPage,
       "limit": parseInt(value),
       "query": this.query
     }
@@ -94,5 +102,8 @@ export class HomeComponent implements OnInit {
   }
   clearSearch(){
     this.bookSearch.setValue('')
+    this.queryNotFound = false
+    this.showClearSearchBtn = false
   }
+  
 } 

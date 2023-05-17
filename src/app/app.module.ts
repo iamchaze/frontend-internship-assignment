@@ -9,10 +9,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { NgxUiLoaderModule } from "ngx-ui-loader";
+import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from "ngx-ui-loader";
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
-  declarations: [AppComponent, TrendingSubjectsComponent, HomeComponent],
+  declarations: [AppComponent, TrendingSubjectsComponent, HomeComponent, NavbarComponent],
   imports: [
     BrowserModule,
     RouterModule,
@@ -22,8 +24,11 @@ import { NgxUiLoaderModule } from "ngx-ui-loader";
     NgxPaginationModule,
     SharedModule,
     NgxUiLoaderModule,
-    FormsModule
-    
+    NgxUiLoaderHttpModule.forRoot({
+      showForeground: true
+    }),
+    FormsModule,
+    Ng2SearchPipeModule
   ],
   providers: [],
   bootstrap: [AppComponent],

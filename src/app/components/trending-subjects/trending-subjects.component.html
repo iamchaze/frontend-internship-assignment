@@ -1,6 +1,13 @@
-<div *ngIf="allBooks.length > 0">
-  <front-end-internship-assignment-table-view
-  [booksList]="allBooks"
-  [subjectName]="subjectName"
-  ></front-end-internship-assignment-table-view>
+<div class="row">
+  <div class="col-2">
+    <front-end-internship-assignment-navbar></front-end-internship-assignment-navbar>
+  </div>
+  <div class="col-10">
+    <div *ngIf="allBooks.length > 0">
+      <front-end-internship-assignment-table-view
+      [booksList]="allBooks"
+      [subjectName]="subjectName"
+      ></front-end-internship-assignment-table-view>
+    </div>
+  </div>  
 </div>

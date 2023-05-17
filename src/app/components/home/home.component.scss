@@ -7,7 +7,6 @@
   tw-rounded-4-px
   tw-p-12-px
   tw-m-24-px;
-  background: linear-gradient(146deg, #e1eeff 19.67%, #ffe4fb 127.56%);
 }
 
 .search-button {
@@ -28,4 +27,123 @@
   tw-p-12-px
   tw-rounded-4-px
   tw-shadow-lg
+}
+.header{
+  background-color: rgb(241, 241, 241);
+  margin: 0;
+  padding: 10px 100px 10px 280px;
+  border-top-left-radius: 40px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+.search-button{
+  border: none;
+  background-color: rgb(218, 218, 218);
+  border-radius: 100px;
+  width: 30%;
+}
+.search-button input{
+  width: 85%;
+  background-color: inherit;
+  margin: 5px auto;
+  font-size: 2vh;
+}
+.search-button mat-icon{
+  margin: auto;
+  font-size: 2rem;
+}
+.fa-times{
+  margin: auto;
+  font-size: 2rem;
+}
+.row{
+  width: 100%;
+  padding-bottom: 100px;
+}
+.navbar{
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  align-items: start;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+.navbar section{
+  position: fixed;
+  bottom: 0;
+  margin: 0;
+  padding-top: 120px;
+  border-bottom-left-radius: 40px;
+  color: white;
+  background: rgb(83,0,214);
+  background: linear-gradient(180deg, rgba(83,0,214,0.8575805322128851) 0%, rgba(176,47,235,1) 100%);
+}
+.navbar button{
+  background-color: inherit;
+  border: none;
+  display: block;
+  width: 100%;
+  color: white;
+  align-items: start;
+  font-weight: bold;
+  font-size: 2vh;
+  text-align: start;
+  padding: .5vh;
+  border-radius: 5px;
+  padding: 10px 10px 10px 20px;  
+}
+.navbar-header{
+  margin-top: 20px;
+}
+#home-btn{
+  background-color: #d285fb;
+}
+#search-btn{
+
+}
+i{
+  margin: 5px;
+}
+li{
+  font-size: 1.4rem;
+}
+.navbar button:hover, li:hover{
+  opacity: .8;
+}
+.no-res-found{
+  position: absolute;
+  top: 50%;
+  left: 55%;
+  transform: translate(-50%, -50%);
+}
+.page-no{
+  text-align: end;
+  font-size: 1.3rem;
+  margin: 2% auto;
+  text-decoration: underline;
+}
+.table-navigation{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: auto 5%;
+}
+.table-navigation button{
+  background-color: grey;
+  color: white;
+  font-size: 1.7rem;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  box-shadow: 0 0 3px rgba(0,0,0,0.7);
+}
+.table-navigation button i{
+  font-weight:bold;
+}
+.table-size{
+  display: inline;
+}
+.table-size p{
+  font-size: 1.5rem;
 }

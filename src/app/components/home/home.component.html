@@ -2,29 +2,54 @@
   <div class="tw-text-24-px tw-font-600">Open Books Library</div>
   <div class="search-button">
     <mat-icon class="tw-mt-16-px" aria-label="Search Icon">search</mat-icon>
-    <input [formControl]="bookSearch" name="searchKey" type="text" placeholder="Search Books"
-      class="tw-border-0 tw-bg-inherit">
-      <button (click)="clearSearch()">X</button>
+    <input
+      [formControl]="bookSearch"
+      name="searchKey"
+      type="text"
+      placeholder="Search Books"
+      class="tw-border-0 tw-bg-inherit"
+    />
+    <i
+      *ngIf="showClearSearchBtn"
+      class="fa fa-times"
+      aria-hidden="true"
+      (click)="clearSearch()"
+    ></i>
   </div>
 </div>
-<div class="tw-flex tw-flex-row tw-m-24-px">
-  <section class="trending-subjects">
-    <div class="tw-font-600 tw-text-24-px">Trending Subjects</div>
-    <ul class="tw-list-none tw-pl-0">
-      <li class="tw-text-16-px tw-cursor-pointer tw-p-12-px" *ngFor="let subject of trendingSubjects"
-        routerLink="/trending-subject/{{ subject.name }}">
-        {{ subject.name }}
-      </li>
-    </ul>
-  </section>
-</div>
-<div *ngIf="!isLoading">
-  <front-end-internship-assignment-table-view (emitterObj)="paramObj = $event" [booksList]="allBooksData"
-  [totalRecords]="recordsLength" [parametersData]="paramObj" [subjectName]="query" [currentPage]="currentPage" ></front-end-internship-assignment-table-view>
-<button (click)="previousPage()" [disabled]="previousBtn">Previous</button>
-
-<select (change)="tableSizeChange($event)" [(ngModel)]="tableSize">
-  <option *ngFor="let size of tableSizes"> {{size}} </option>
-</select>
-<button (click)="nextPage()" [disabled]="nextBtn">Next</button>
+<div class="row">
+  <div class="col-2 main-content">
+    <front-end-internship-assignment-navbar></front-end-internship-assignment-navbar>
+  </div>
+  <div class="col-10">
+    <div *ngIf="queryNotFound">
+      <h1 class="no-res-found">No Results Found for " {{ query }} "</h1>
+    </div>
+    <div *ngIf="!isLoading">
+      <front-end-internship-assignment-table-view
+        (emitterObj)="paramObj = $event"
+        [booksList]="allBooksData"
+        [totalRecords]="recordsLength"
+        [parametersData]="paramObj"
+        [subjectName]="query"
+        [currentPage]="currentPage"
+      ></front-end-internship-assignment-table-view>
+      <div *ngIf="!displayTrendingSubjectsBook" class="page-no">
+        Page: {{ currentPage + 1 }} of {{ totalPages }}
+      </div>
+      <div class="table-navigation">
+        <button (click)="previousPage()" [disabled]="previousBtn">
+          <i class="fa fa-angle-left" aria-hidden="true"></i>Prev
+        </button>
+        <div class="table-size"><p>Items Per Page:</p>
+          <select class="form-control" (change)="tableSizeChange($event)" [(ngModel)]="tableSize">
+            <option *ngFor="let size of tableSizes">{{ size }}</option>
+          </select>
+        </div>
+        <button (click)="nextPage()" [disabled]="nextBtn">
+          Next<i class="fa fa-angle-right" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+  </div>
 </div>

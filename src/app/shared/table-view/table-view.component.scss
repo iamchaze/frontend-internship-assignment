@@ -48,3 +48,31 @@
     tw-border-light-border
   }
 }
+
+.table-view{
+  width: 100%;
+}
+thead{
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+}
+th{
+  background-color: #b9f2ee;
+  font-size: 1.5rem;
+  padding: .5% 2%;
+ 
+}
+td, a, .author{
+  font-size: 1.3rem;
+}
+tr{
+  padding: auto 2%;
+}
+td{
+  padding: .5% 2%;
+}
+td:hover{
+  background-color: rgb(230, 230, 230);
+}
+.total-books{
+  margin: 2% auto;
+}

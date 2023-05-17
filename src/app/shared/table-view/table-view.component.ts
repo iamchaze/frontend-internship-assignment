@@ -35,11 +35,12 @@ export class TableViewComponent implements OnChanges {
   constructor(private uiloader:NgxUiLoaderService){}
 
   ngOnChanges() {
+    this.totalPages = Math.ceil(this.totalRecords / this.tableSize)
     if(this.booksList){
       this.displayData()
       console.log(this.booksList);
+      
     } 
-    
   }
 displayData(){  
       this.booksList[0].hasOwnProperty(this.property) 
