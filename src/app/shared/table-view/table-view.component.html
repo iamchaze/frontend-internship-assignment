@@ -1,9 +1,13 @@
 <div class="tw-m-24-px">
-  <!-- <div class="tw-mb-24-px tw-text-24-px"> Top {{ booksList.length }} book{{ booksList.length > 1 ? "s" : "" }} on {{ subjectName }}</div> -->
-
+  <div class="tw-mb-24-px tw-text-24-px" *ngIf="displayTrendingSubjectsBook">
+    Top {{ booksList.length }} book{{ booksList.length > 1 ? "s" : "" }} on {{ subjectName }}
+  </div>
   <ng-container>
-    length:  {{ recordsLength}}
-    <table class="table-view">
+  <div *ngIf="!displayTrendingSubjectsBook">
+    <p></p>
+    <h3>Total Books: {{ totalRecords }} </h3>
+  </div>
+    <table class="table-view" mat-table >
       <thead>
         
         <tr class="table-row">
@@ -12,31 +16,25 @@
           <th class="header">First Publish Year</th>
         </tr>
       </thead>
-   
       <tbody class="table-body">
         <tr class="row-data" *ngFor="let book of booksList">
           <td>
-            <a class="tw-no-underline" href="https://openlibrary.org{{ book.key }}" target="_blank">{{ book.title }}</a>
+            <a class="tw-no-underline" href="https://openlibrary.org{{ book.key }}" target="_blank">{{ book?.title }}</a>
           </td>
           <td>
-            <ng-template #trendingSubjects>
+            <div *ngIf="displayTrendingSubjectsBook">
               {{ book.authors.length > 0 ? book.authors[0].name : "Unknown" }}
-            </ng-template>
-            <ng-template #allBooks>
+            </div>
+            <div *ngIf="!displayTrendingSubjectsBook">
               {{ book.author_name }}
-            </ng-template>
-            <p *ngIf="displayTrendingSubjectsBook; then trendingSubjects else allBooks"></p>
+            </div>
           </td>
           <td>{{ book.first_publish_year }}</td>
         </tr>
       </tbody>
     </table>
+    <div *ngIf="!displayTrendingSubjectsBook">
+     Page: {{ currentPage + 1 }}  of  {{ totalRecords % 2 === 0 ? totalRecords/2 : totalRecords/2 + 0.5 }}
+    </div>
   </ng-container>
-
-  <mat-paginator [length]="recordsLength"
-              [pageSize]="tableSize"
-              [pageSizeOptions]="tableSizes"
-              (onPageChange) = "onPageChange($event)"
-              >
-</mat-paginator>
 </div>

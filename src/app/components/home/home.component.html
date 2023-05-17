@@ -2,25 +2,29 @@
   <div class="tw-text-24-px tw-font-600">Open Books Library</div>
   <div class="search-button">
     <mat-icon class="tw-mt-16-px" aria-label="Search Icon">search</mat-icon>
-    <input
-      [formControl]="bookSearch"
-      name="searchKey"
-      type="text"
-      placeholder="Search Books"
-      class="tw-border-0 tw-bg-inherit"
-    >
+    <input [formControl]="bookSearch" name="searchKey" type="text" placeholder="Search Books"
+      class="tw-border-0 tw-bg-inherit">
+      <button (click)="clearSearch()">X</button>
   </div>
 </div>
 <div class="tw-flex tw-flex-row tw-m-24-px">
   <section class="trending-subjects">
     <div class="tw-font-600 tw-text-24-px">Trending Subjects</div>
     <ul class="tw-list-none tw-pl-0">
-      <li class="tw-text-16-px tw-cursor-pointer tw-p-12-px" *ngFor="let subject of trendingSubjects" routerLink="/trending-subject/{{ subject.name }}">
+      <li class="tw-text-16-px tw-cursor-pointer tw-p-12-px" *ngFor="let subject of trendingSubjects"
+        routerLink="/trending-subject/{{ subject.name }}">
         {{ subject.name }}
       </li>
     </ul>
   </section>
 </div>
-<front-end-internship-assignment-table-view
-[booksList]="allBooksData"
-></front-end-internship-assignment-table-view>
+<div *ngIf="!isLoading">
+  <front-end-internship-assignment-table-view (emitterObj)="paramObj = $event" [booksList]="allBooksData"
+  [totalRecords]="recordsLength" [parametersData]="paramObj" [subjectName]="query" [currentPage]="currentPage" ></front-end-internship-assignment-table-view>
+<button (click)="previousPage()" [disabled]="previousBtn">Previous</button>
+
+<select (change)="tableSizeChange($event)" [(ngModel)]="tableSize">
+  <option *ngFor="let size of tableSizes"> {{size}} </option>
+</select>
+<button (click)="nextPage()" [disabled]="nextBtn">Next</button>
+</div>

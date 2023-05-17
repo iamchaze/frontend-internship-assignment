@@ -7,8 +7,9 @@ import { TrendingSubjectsComponent } from '../app/components/trending-subjects/t
 import { HomeComponent } from '../app/components/home/home.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { NgxUiLoaderModule } from "ngx-ui-loader";
 
 @NgModule({
   declarations: [AppComponent, TrendingSubjectsComponent, HomeComponent],
@@ -19,7 +20,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
     HttpClientModule,
     ReactiveFormsModule,
     NgxPaginationModule,
-    SharedModule
+    SharedModule,
+    NgxUiLoaderModule,
+    FormsModule
     
   ],
   providers: [],

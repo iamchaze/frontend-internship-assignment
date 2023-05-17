@@ -5,11 +5,20 @@ import {MatIconModule} from '@angular/material/icon';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { FormsModule } from '@angular/forms';
+import { NgxUiLoaderModule } from "ngx-ui-loader";
 
 @NgModule({
   declarations: [TableViewComponent],
-  imports: [CommonModule, MatIconModule, NgxPaginationModule, MatPaginatorModule,BrowserAnimationsModule],
+  imports: [
+    CommonModule, 
+    MatIconModule, 
+    NgxPaginationModule, 
+    MatPaginatorModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    NgxUiLoaderModule
+  ],
   exports: [TableViewComponent, MatIconModule]
 })
 export class SharedModule {}

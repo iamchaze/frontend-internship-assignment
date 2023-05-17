@@ -37,5 +37,4 @@ export class TrendingSubjectsComponent implements OnInit {
       this.getAllBooks();
     });
   }
-
 }
